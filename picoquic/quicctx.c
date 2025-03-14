@@ -643,7 +643,7 @@ picoquic_quic_t* picoquic_create(uint32_t max_nb_connections,
         quic->cnx_id_callback_fn = cnx_id_callback;
         quic->cnx_id_callback_ctx = cnx_id_callback_ctx;
         quic->p_simulated_time = p_simulated_time;
-        quic->local_cnxid_length = 8; /* TODO: should be lower on clients-only implementation */
+        quic->local_cnxid_length = 1; /* TODO: should be lower on clients-only implementation */
         quic->padding_multiple_default = 0; /* TODO: consider default = 128 */
         quic->padding_minsize_default = PICOQUIC_RESET_PACKET_MIN_SIZE;
         quic->crypto_epoch_length_max = 0;
@@ -3682,7 +3682,7 @@ picoquic_cnx_t* picoquic_create_cnx(picoquic_quic_t* quic,
         cnx->client_mode = client_mode;
         if (client_mode) {
             if (picoquic_is_connection_id_null(&initial_cnx_id)) {
-                picoquic_create_random_cnx_id(quic, &initial_cnx_id, 8);
+                picoquic_create_random_cnx_id(quic, &initial_cnx_id, 1);
             }
         }
         cnx->initial_cnxid = initial_cnx_id;
